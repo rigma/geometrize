@@ -1,3 +1,5 @@
+use crate::math::Point;
+
 /// Defines an ellipse by using its cartesian representation:
 /// $\left ( \frac{x - u}{a} \right ) ^ 2 + \left ( \frac{y - v}{b} \right ) ^ 2 = 1$
 ///
@@ -25,8 +27,7 @@
 /// [Shape]: ./Shape.trait.html
 #[derive(Clone, Copy, Debug)]
 pub struct Ellipse {
-    u: f64,
-    v: f64,
+    center: Point,
     a: f64,
     b: f64,
     angle: Option<f64>,
@@ -41,8 +42,7 @@ impl Ellipse {
     pub fn random() -> Self {
         // TODO: generates the random ellipse thanks to a RNG
         Self {
-            u: 0.0,
-            v: 0.0,
+            center: Point::zero(),
             a: 1.0,
             b: 1.0,
             angle: None,
@@ -53,8 +53,7 @@ impl Ellipse {
     pub fn random_rotated() -> Self {
         // TODO: generates a random rotated ellipse thanks to a RNG
         Self {
-            u: 0.0,
-            v: 0.0,
+            center: Point::zero(),
             a: 1.0,
             b: 1.0,
             angle: Some(0.0),
@@ -119,8 +118,7 @@ impl EllipseBuilder {
 
     pub fn build(self) -> Ellipse {
         Ellipse {
-            u: self.u,
-            v: self.v,
+            center: Point::new(self.u, self.v),
             a: self.a,
             b: self.b,
             angle: self.angle,
@@ -135,8 +133,7 @@ mod tests {
     #[test]
     fn it_indicates_if_an_ellipse_is_a_circle() {
         let circle = Ellipse {
-            u: 0.0,
-            v: 0.0,
+            center: Point::zero(),
             a: 1.0,
             b: 1.0,
             angle: None,
@@ -148,8 +145,7 @@ mod tests {
     #[test]
     fn it_indicates_if_an_ellipse_is_rotated() {
         let ellipse = Ellipse {
-            u: 0.0,
-            v: 0.0,
+            center: Point::zero(),
             a: 1.0,
             b: 2.0,
             angle: Some(std::f64::consts::PI / 4.0),
