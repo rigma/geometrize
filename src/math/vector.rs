@@ -46,12 +46,17 @@ impl Vector {
     }
 
     pub fn normalize(&self) -> Self {
-        let magnitude = q_rsqrt(self.x * self.x + self.y * self.y);
+        let magnitude = q_rsqrt(self.dot(self));
 
         Self {
             x: self.x * magnitude,
             y: self.y * magnitude,
         }
+    }
+
+    #[inline]
+    pub fn dot(&self, other: &Self) -> f64 {
+        self.x * other.x + self.y * other.y
     }
 }
 
@@ -72,5 +77,13 @@ mod tests {
         let v = u.normalize();
 
         assert!((v.magnitude() - 1.0).abs() < f64::EPSILON);
+    }
+
+    #[test]
+    fn vector_can_have_a_dot_product() {
+        let u = Vector::new(1.0, 0.0);
+        let v = Vector::new(0.0, 1.0);
+
+        assert_eq!(0.0, u.dot(&v));
     }
 }
