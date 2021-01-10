@@ -1,4 +1,5 @@
 mod ellipse;
+mod triangle;
 
 /// Defines the common behavior of all mathematical shapes.
 pub trait Shape {
@@ -6,3 +7,4 @@ pub trait Shape {
 }
 
 pub use ellipse::Ellipse;
+pub use triangle::Triangle;
