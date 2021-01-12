@@ -58,6 +58,11 @@ impl Vector {
     pub fn dot(&self, other: &Self) -> f64 {
         self.x * other.x + self.y * other.y
     }
+
+    #[inline]
+    pub fn cross(&self, other: &Self) -> f64 {
+        self.x * other.y - self.y * other.x
+    }
 }
 
 #[cfg(test)]
