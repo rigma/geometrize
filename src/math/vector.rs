@@ -18,7 +18,7 @@ fn q_rsqrt(x: f64) -> f64 {
     // the inverse square root of `x`.
     // Further details here: https://timmmm.github.io/fast-inverse-square-root/
     let word = 0x5fe6eb50c7b537a9 - (word >> 1);
-    
+
     // Step 3: Newton-Raphson iteration. We use this method to have a
     // closer approximation of the inverse square root value.
     let threehalfs = 1.5;

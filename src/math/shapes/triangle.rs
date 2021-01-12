@@ -1,5 +1,5 @@
-use crate::math::{Point, Vector};
 use super::Shape;
+use crate::math::{Point, Vector};
 
 /// Defines a triangle with a vector of 3 vertices which are 3 points on the
 /// the plane.
