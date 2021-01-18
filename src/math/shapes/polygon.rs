@@ -5,6 +5,33 @@ use super::Shape;
 /// its vertices. This shape can be validated by using [`is_valid`]
 /// method that we'll check that the polygon is convex. If the current
 /// polygon is not degenerated and convex, then we'll validate it.
+///
+/// # Example
+///
+/// ```
+/// use geometrize::{math::Point, shapes::{Polygon, Shape}};
+///
+/// // Produces a new convex polygon which represents the unit square.
+/// let polygon = Polygon::from(vec![
+///    Point::zero(),
+///    Point::new(1.0, 0.0),
+///    Point::new(1.0, 1.0),
+///    Point::new(0.0, 1.0)
+/// ]);
+/// assert!(polygon.is_valid());
+///
+/// // Produces a new non-convex polygon
+/// let polygon = Polygon::from(vec![
+///     Point::zero(),
+///     Point::new(0.0, 1.0),
+///     Point::new(10.0, 10.0),
+///     Point::new(1.0, 1.0),
+///     Point::new(1.0, 0.0)
+/// ]);
+/// assert!(!polygon.is_valid());
+/// ```
+///
+/// [`is_valid`]: ./struct.Polygon.html#method.is_valid
 #[derive(Clone, Debug, Default)]
 pub struct Polygon {
     vertices: Vec<Point>
@@ -70,6 +97,38 @@ impl From<Vec<Point>> for Polygon {
 impl Shape for Polygon {
     fn mutate(&mut self) {
         //
+    }
+
+    /// Checks if the current polygon is valid or not. To do so, the
+    /// method we'll check that the polygon is not dengenerated or not
+    /// convex by checking that the cross products of all its vertices
+    /// have the same sign.
+    fn is_valid(&self) -> bool {
+        let order = self.order();
+        if order < 3 {
+            return false;
+        }
+
+        let sign = {
+            let u: Vector = self.vertices[1] - self.vertices[0];
+            let v: Vector = self.vertices[2] - self.vertices[1];
+            u.cross(&v) > 0.0
+        };
+
+        for idx in 1..order {
+            let (u, v): (Vector, Vector) = {
+                let i = idx % order;
+                let j = (idx + 1) % order;
+                let k = (idx + 2) % order;
+                (self.vertices[j] - self.vertices[i], self.vertices[k] - self.vertices[j])
+            };
+
+            if (u.cross(&v) > 0.0) != sign {
+                return false;
+            }
+        }
+
+        true
     }
 }
 

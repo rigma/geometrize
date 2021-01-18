@@ -45,17 +45,6 @@ impl Rectangle {
     pub const fn height(&self) -> f64 {
         self.scaling.1
     }
-
-    /// Returns if the rectangle is valid or not.
-    pub fn is_valid(&self) -> bool {
-        let (width, height) = if self.scaling.0 < self.scaling.1 {
-            (self.scaling.1, self.scaling.0)
-        } else {
-            self.scaling
-        };
-
-        width / height <= MAX_ASPECT_RATIO
-    }
 }
 
 impl Default for Rectangle {
@@ -71,6 +60,16 @@ impl Default for Rectangle {
 impl Shape for Rectangle {
     fn mutate(&mut self) {
         //
+    }
+
+    fn is_valid(&self) -> bool {
+        let (width, height) = if self.scaling.0 < self.scaling.1 {
+            (self.scaling.1, self.scaling.0)
+        } else {
+            self.scaling
+        };
+
+        width / height <= MAX_ASPECT_RATIO
     }
 }
 

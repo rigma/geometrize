@@ -24,10 +24,20 @@ impl Triangle {
     }
 
     // TODO: add a method to instanciate a random triangle
+}
 
-    /// Checks if the current triangle is valid with the constraints we use for
-    /// the shape definition.
-    pub fn is_valid(&self) -> bool {
+impl From<[Point; 3]> for Triangle {
+    fn from(vertices: [Point; 3]) -> Self {
+        Self { vertices }
+    }
+}
+
+impl Shape for Triangle {
+    fn mutate(&mut self) {
+        //
+    }
+
+    fn is_valid(&self) -> bool {
         let a1 = {
             let u: Vector = (self.vertices[1] - self.vertices[0]).normalize();
             let v: Vector = (self.vertices[2] - self.vertices[0]).normalize();
@@ -41,18 +51,6 @@ impl Triangle {
         let a3 = 180.0 - a2 - a1;
 
         a1 >= MIN_INTERNAL_ANGLE && a2 >= MIN_INTERNAL_ANGLE && a3 >= MIN_INTERNAL_ANGLE
-    }
-}
-
-impl From<[Point; 3]> for Triangle {
-    fn from(vertices: [Point; 3]) -> Self {
-        Self { vertices }
-    }
-}
-
-impl Shape for Triangle {
-    fn mutate(&mut self) {
-        //
     }
 }
 
