@@ -1,4 +1,5 @@
 mod ellipse;
+mod polygon;
 mod rectangle;
 mod triangle;
 
@@ -8,5 +9,6 @@ pub trait Shape {
 }
 
 pub use ellipse::Ellipse;
+pub use polygon::Polygon;
 pub use rectangle::Rectangle;
 pub use triangle::Triangle;
