@@ -1,3 +1,4 @@
+mod images;
 mod math;
 
 fn main() {
