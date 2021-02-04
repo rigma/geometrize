@@ -9,7 +9,7 @@ use super::Shape;
 /// # Example
 ///
 /// ```
-/// use geometrize::{math::Point, shapes::{Polygon, Shape}};
+/// use libgeometrize::math::{shapes::{Polygon, Shape}, Point};
 ///
 /// // Produces a new convex polygon which represents the unit square.
 /// let polygon = Polygon::from(vec![

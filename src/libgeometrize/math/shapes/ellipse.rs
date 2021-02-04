@@ -11,6 +11,8 @@ use crate::math::Point;
 /// # Example
 ///
 /// ```
+/// use libgeometrize::math::shapes::Ellipse;
+///
 /// // Generating a random non-rotated ellipse
 /// let ellipse = Ellipse::random();
 ///
@@ -20,7 +22,7 @@ use crate::math::Point;
 ///     .v(0.0)
 ///     .a(1.0)
 ///     .b(1.0)
-///     .angle(std::f64::consts::PI / 4)
+///     .angle(std::f64::consts::FRAC_PI_4)
 ///     .build();
 /// ```
 ///

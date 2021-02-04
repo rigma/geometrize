@@ -8,6 +8,8 @@ use image::{GrayImage, ImageBuffer, Luma};
 /// # Example
 ///
 /// ```
+/// use libgeometrize::images::Heatmap;
+///
 /// // Instanciating a simple heatmap from a closure
 /// let heatmap = Heatmap::from_fn(32, 32, |x, y| {
 ///    if (x * y) % 2 == 0 {

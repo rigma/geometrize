@@ -11,6 +11,8 @@ const MAX_ASPECT_RATIO: f64 = 5.0;
 /// # Example
 ///
 /// ```
+/// use libgeometrize::math::shapes::{Rectangle, Shape};
+///
 /// // Instanciates a rotated golden rectangle.
 /// let rect = Rectangle::new()
 ///     .height((1.0 + 5_f64.sqrt()) / 2.0)
